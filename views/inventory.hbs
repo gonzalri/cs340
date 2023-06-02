@@ -1,0 +1,71 @@
+<html>
+<head>
+<title>Inventory</title>
+<link href="mystyle.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<h1>Inventory</h1>
+<div style="text-align:center;">
+  <a href="/index">Home</a> |
+  <a href="/customers">Customers</a> |
+  <a href="/vinyl">Vinyls</a> |
+  <a href="/orders">Orders</a> |
+  <a href="/orderitems">Order Items</a> |
+  <a href="/inventory">Inventory</a>
+</div>
+<div id="browse" style="display: block">
+<p><strong>Browse All Inventory</strong></p>
+<th><a href="#"><br><br>New</a></th>
+<table id="inventory-table" border="1" cellpadding="5">  
+      {{!-- Header section --}}
+      <thead>
+  
+          {{!-- For just the first row, we print each key of the row object as a header cell so we
+          know what each column means when the page renders --}}
+          <tr>
+              {{#each data.[0]}}
+              <th>
+                  {{@key}}
+              </th>
+              {{/each}}
+              <th>delete</th>
+          </tr>
+      </thead>
+  
+      {{!-- Body section --}}
+      <tbody>
+  
+          {{!-- For each row, print the id, fname, lname, homeworld and age, in order --}}
+          {{#each data}}
+          <tr data-value={{this.inventoryID}}>
+              <td>{{this.inventoryID}}</td>
+              <td>{{this.vinylID}}</td>
+              <td>{{this.inventoryQty}}</td>
+              <td><button onclick="deleteInventory({{this.inventoryID}})">Delete</button></td>
+          </tr>
+          {{/each}}
+      </tbody>
+</table>
+<script src="./js/delete_inventory.js"></script>
+<p>&nbsp;</p>
+</div> 
+
+{{!-- Form to add a record to the table  --}}
+<div id="insert" style="display: block">
+    <form id="add-inventory-form" method="POST" action="/add-inventory-form">
+        <legend><strong>Add Order</strong></legend>
+          <fieldset class="fields">
+            <label for="input-vinylID">Vinyl ID: </label>
+            <input type="text" name="input-vinylID" id="input-vinylID">
+            
+            <label for="input-inventoryQty">Inventory Quantity: </label>
+            <input type="text" name="input-inventoryQty" id="input-inventoryQty">
+          </fieldset>
+          <input type="submit">
+	</form> <!--add new order-->
+
+
+</div><!-- insert -->
+
+</body>
+</html>
