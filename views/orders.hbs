@@ -1,0 +1,79 @@
+<html>
+<head>
+<title>Orders</title>
+<link href="mystyle.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<h1>Orders</h1>
+<div style="text-align:center;">
+  <a href="/index">Home</a> |
+  <a href="/customers">Customers</a> |
+  <a href="/vinyl">Vinyls</a> |
+  <a href="/orders">Orders</a> |
+  <a href="/orderitems">Order Items</a> |
+  <a href="/inventory">Inventory</a>
+</div>
+<div id="browse" style="display: block">
+<p><strong>Browse All Orders</strong></p>
+<th><a href="#"><br><br>New</a></th>
+<table id="order-table" border="1" cellpadding="5">  
+      {{!-- Header section --}}
+      <thead>
+  
+          {{!-- For just the first row, we print each key of the row object as a header cell so we
+          know what each column means when the page renders --}}
+          <tr>
+              {{#each data.[0]}}
+              <th>
+                  {{@key}}
+              </th>
+              {{/each}}
+              <th>delete</th>
+          </tr>
+      </thead>
+  
+      {{!-- Body section --}}
+      <tbody>
+  
+          {{!-- For each row, print the id, fname, lname, homeworld and age, in order --}}
+          {{#each data}}
+          <tr data-value={{this.orderID}}>
+              <td>{{this.orderID}}</td>
+              <td>{{this.customerID}}</td>
+              <td>{{this.orderStatus}}</td>
+              <td>{{this.orderDate}}</td>
+              <td>{{this.orderTotal}}</td>
+              <td><button onclick="deleteOrder({{this.orderID}})">Delete</button></td>
+          </tr>
+          {{/each}}
+      </tbody>
+</table>
+<script src="./js/delete_order.js"></script>
+<p>&nbsp;</p>
+</div> 
+
+{{!-- Form to add a record to the table  --}}
+<div id="insert" style="display: block">
+    <form id="add-customer-form" method="POST" action="/add-customer-form">
+        <legend><strong>Add Order</strong></legend>
+          <fieldset class="fields">
+            <label for="input-customerID">Customer ID: </label>
+            <input type="text" name="input-customerID" id="input-customerID">
+            
+            <label for="input-orderStatus">Order Status: </label>
+            <input type="text" name="input-orderStatus" id="input-orderStatus">
+            
+            <label for="input-orderDate">Order Date: </label>
+            <input type="text" name="input-orderDate" id="input-orderDate">
+            
+            <label for="input-orderTotal">Order Total: </label>
+            <input type="text" name="input-orderTotal" id="input-orderTotal">
+          </fieldset>
+          <input type="submit">
+	</form> <!--add new order-->
+
+
+</div><!-- insert -->
+
+</body>
+</html>
