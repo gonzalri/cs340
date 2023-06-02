@@ -1,0 +1,122 @@
+<html>
+<head>
+<title>Customers</title>
+<link href="mystyle.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<h1>Customers</h1>
+<div style="text-align:center;">
+  <a href="/index">Home</a> |
+  <a href="/customers">Customers</a> |
+  <a href="/vinyl">Vinyl</a> |
+  <a href="/orders">Orders</a> |
+  <a href="/orderitems">Order Items</a> |
+  <a href="/inventory">Inventory</a>
+</div>
+<div id="browse" style="display: block">
+<p><strong>Browse All Customers</strong></p>
+<label>Search by: </label>
+<label><br>Phone # &nbsp; </label> <input type="text" name="phone_number">
+<label><br>Email &nbsp; &nbsp; &nbsp;</label> <input type="text" name="email">
+<br><input class="btn" type="submit" id="search customers" value="Search">
+<th><a href="#"><br><br>New</a></th>
+<table id="customer-table" border="1" cellpadding="5">  
+      {{!-- Header section --}}
+      <thead>
+  
+          {{!-- For just the first row, we print each key of the row object as a header cell so we
+          know what each column means when the page renders --}}
+          <tr>
+              {{#each data.[0]}}
+              <th>
+                  {{@key}}
+              </th>
+              {{/each}}
+              <th>delete</th>
+          </tr>
+      </thead>
+  
+      {{!-- Body section --}}
+      <tbody>
+  
+          {{!-- For each row, print the id, fname, lname, homeworld and age, in order --}}
+          {{#each data}}
+          <tr data-value={{this.customerID}}>
+              <td>{{this.customerID}}</td>
+              <td>{{this.customerFirstName}}</td>
+              <td>{{this.customerLastName}}</td>
+              <td>{{this.customerEmail}}</td>
+              <td>{{this.customerStreetAddress}}</td>
+              <td>{{this.customerCity}}</td>
+              <td>{{this.customerZipcode}}</td>
+              <td>{{this.customerState}}</td>
+              <td>{{this.customerPhone}}</td>
+              <td><button onclick="deleteCustomer({{this.customerID}})">Delete</button></td>
+          </tr>
+          {{/each}}
+      </tbody>
+</table>
+<script src="./js/delete_customer.js"></script>
+<p>&nbsp;</p>
+</div> 
+
+{{!-- Form to add a record to the table  --}}
+<div id="insert" style="display: block">
+    <form id="add-customer-form" method="POST" action="/add-customer-form">
+        <legend><strong>Add Customer</strong></legend>
+          <fieldset class="fields">
+            <label for="input-customerFirstName">First Name: </label>
+            <input type="text" name="input-customerFirstName" id="input-customerFirstName">
+            
+            <label for="input-customerLastName">Last Name: </label>
+            <input type="text" name="input-customerLastName" id="input-customerLastName">
+            
+            <label for="input-customerEmail">Email: </label>
+            <input type="text" name="input-customerEmail" id="input-customerEmail">
+            
+            <label for="input-customerStreetAddress">Street Address: </label>
+            <input type="text" name="input-customerStreetAddress" id="input-customerStreetAddress">
+            
+            <label for="input-customerCity">City: </label>
+            <input type="text" name="input-customerCity" id="input-customerCity">
+            
+            <label for="input-customerZipcode">Zipcode: </label>
+            <input type="number" name="input-customerZipcode" id="input-customerZipcode">
+            
+            <label for="input-customerState">State: </label>
+            <input type="text" name="input-customerState" id="input-customerState">
+            
+            <label for="input-customerPhone">Phone: </label>
+            <input type="text" name="input-customerPhone" id="input-customerPhone">
+          </fieldset>
+          <input type="submit">
+	</form> <!--add new customer-->
+
+
+</div><!-- insert -->
+
+<p>&nbsp;</p>
+<div id="update" style="display: block">
+  <form id="update-customer-form-ajax">
+      <legend><strong>Update Customer Street Address</strong></legend>
+          <fieldset class="fields">
+
+          <label for="input-customerID">Customer ID: </label>
+          <select name="input-customerID" id="mySelect">
+              <option value="test">Select a Customer ID</option>
+              {{#each data}}
+              <option value="{{this.customerID}}">{{this.customerID}}</option>
+              {{/each}}
+          </select>
+
+          <label for="input-streetaddress">Street Address: </label>
+          <input type="text" name="input-streetaddress" id="input-streetaddress-update">
+          <input type="submit">
+    </fieldset>
+  </form> 
+<script src="./js/update_customer.js"></script>
+</div><!-- update -->
+<p>&nbsp;</p>
+
+</body>
+</html>
