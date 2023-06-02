@@ -1,8 +1,8 @@
 // Get the objects we need to modify
-let addVinylForm = document.getElementById('add-customer-form');
+let addInventoryForm = document.getElementById('add-inventory-form');
 
 // Modify the objects we need
-addVinylForm.addEventListener("submit", function (e) {
+addInventoryForm.addEventListener("submit", function (e) {
     
     // Prevent the form from submitting
     e.preventDefault();
