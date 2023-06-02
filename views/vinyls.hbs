@@ -1,0 +1,98 @@
+<html>
+<head>
+<title>Vinyls</title>
+<link href="mystyle.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<h1>Vinyls</h1>
+<div style="text-align:center;">
+  <a href="/index">Home</a> |
+  <a href="/customers">Customers</a> |
+  <a href="/vinyl">Vinyls</a> |
+  <a href="/orders">Orders</a> |
+  <a href="/orderitems">Order Items</a> |
+  <a href="/inventory">Inventory</a>
+</div>
+<div id="browse" style="display: block">
+<p><strong>Browse All Vinyls</strong></p>
+<label>Search by: <br></label>
+<label>Release Year &nbsp; &nbsp;&nbsp;</label> <input type="text" name="release_year">
+<label><br>Vinyl Condition &nbsp;&nbsp;</label>
+<br><input class="btn" type="submit" id="search vinyls" value="Search">
+<th><a href="#"><br><br>New</a></th>
+<table id="vinyl-table" border="1" cellpadding="5">  
+      {{!-- Header section --}}
+      <thead>
+  
+          {{!-- For just the first row, we print each key of the row object as a header cell so we
+          know what each column means when the page renders --}}
+          <tr>
+              {{#each data.[0]}}
+              <th>
+                  {{@key}}
+              </th>
+              {{/each}}
+              <th>delete</th>
+          </tr>
+      </thead>
+  
+      {{!-- Body section --}}
+      <tbody>
+  
+          {{!-- For each row, print the id, fname, lname, homeworld and age, in order --}}
+          {{#each data}}
+          <tr data-value={{this.vinylID}}>
+              <td>{{this.vinylID}}</td>
+              <td>{{this.vinylTitle}}</td>
+              <td>{{this.vinylArtist}}</td>
+              <td>{{this.vinylGenre}}</td>
+              <td>{{this.vinylReleaseYear}}</td>
+              <td>{{this.vinylFormat}}</td>
+              <td>{{this.vinylRecordLabel}}</td>
+              <td>{{this.vinylCondition}}</td>
+              <td>{{this.vinylPrice}}</td>
+              <td><button onclick="deleteVinyl({{this.vinylID}})">Delete</button></td>
+          </tr>
+          {{/each}}
+      </tbody>
+</table>
+<script src="./js/delete_vinyl.js"></script>
+<p>&nbsp;</p>
+</div> 
+
+{{!-- Form to add a record to the table  --}}
+<div id="insert" style="display: block">
+    <form id="add-vinyl-form" method="POST" action="/add-vinyl-form">
+        <legend><strong>Add Vinyl</strong></legend>
+          <fieldset class="fields">
+            <label for="input-vinylTitle">Title: </label>
+            <input type="text" name="input-vinylTitle" id="input-vinylTitle">
+            
+            <label for="input-vinylArtist">Artist: </label>
+            <input type="text" name="input-vinylArtist" id="input-vinylArtist">
+            
+            <label for="input-vinylGenre">Genre: </label>
+            <input type="text" name="input-vinylGenre" id="input-vinylGenre">
+            
+            <label for="input-vinylReleaseYear">Release Year: </label>
+            <input type="text" name="input-vinylReleaseYear" id="input-vinylReleaseYear">
+            
+            <label for="input-vinylFormat">Format: </label>
+            <input type="text" name="input-vinylFormat" id="input-vinylFormat">
+            
+            <label for="input-vinylRecordLabel">Record Label: </label>
+            <input type="number" name="input-vinylRecordLabel" id="input-vinylRecordLabel">
+            
+            <label for="input-vinylCondition">Condition: </label>
+            <input type="text" name="input-vinylCondition" id="input-vinylCondition">
+            
+            <label for="input-vinylPrice">Price: </label>
+            <input type="text" name="input-vinylPrice" id="input-vinylPrice">
+          </fieldset>
+          <input type="submit">
+	</form> <!--add new vinyl-->
+
+
+</div><!-- insert -->
+</body>
+</html>
